@@ -70,9 +70,9 @@ export default function AnimatedFeatures() {
   }, [])
 
   const sliderImages = [
-    '/src/assets/google-chrome-wallpaper2.png',
-    '/src/assets/google-chrome-wallpaper3.png',
-    '/src/assets/google-chrome-wallpaper.png'
+    'https://lh3.googleusercontent.com/9DS8DS5nHULGpMfTt3bVGBMTrEjqXWQRijziOJwM9CWlo1B-1oXN3ypQbHUd315Gt62I8_T4u9lOwKbKvXaUcX33XA=s275-w275-h175',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIxXnNKWfnRE6EVn1iX7No6LzEdg-Jynz5AMLU_imzME4cSTe-zVHMjYworNdxczRhVIk&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRItq1pVN-am-Ysv6AfIMF2ZjOZA9hNv6dE1hMRPK_X9THhcj1D7Fdzx-AguJfaLP6Hg68&usqp=CAU'
   ]
 
   const details = [
@@ -80,19 +80,19 @@ export default function AnimatedFeatures() {
       title: 'Customise your Chrome',
       desc: 'Personalise your web browser with themes, dark mode and other options built just for you.',
       btn: 'Explore themes',
-      img: '/src/assets/customise-your.png'
+      img: 'https://www.google.com/chrome/static/images/v2/accordion-timed/themes-mobile-2x.webp'
     },
     {
       title: 'Browse across devices',
       desc: 'Sign in to Chrome on any device to access your bookmarks, saved passwords and more.',
       btn: 'Learn more',
-      img: '/src/assets/browse-across.png'
+      img: 'https://www.google.com/chrome/static/images/v2/accordion-timed/tab-sync-mobile-2x.webp'
     },
     {
       title: 'Save time with autofill',
       desc: 'Use Chrome to save addresses, passwords and more to quickly autofill your details.',
       btn: 'Get started',
-      img: '/src/assets/save-time.png'
+      img: 'https://www.google.com/chrome/static/images/v2/accordion-timed/autofill-mobile-2x.webp'
     }
   ]
 
@@ -303,7 +303,7 @@ export default function AnimatedFeatures() {
           <button className="menu-btn" onClick={() => setMenuOpen(true)} aria-label="Open Menu">
             &#9776;
           </button>
-          <img src="/src/assets/chrome.png" alt="Chrome Logo" className="logo" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png" alt="Chrome Logo" className="logo" />
           <span className="header-title">Chrome</span>
         </div>
 
@@ -329,7 +329,7 @@ export default function AnimatedFeatures() {
           </nav>
 
           <div className="menu-footer">
-            <img src="/src/assets/chrome.png" alt="Chrome" className="menu-logo" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png" alt="Chrome" className="menu-logo" />
             <h3>The browser built to be yours</h3>
             <button className="download-btn">Download Chrome</button>
             <p>For Windows 11/10 64-bit</p>
@@ -340,7 +340,7 @@ export default function AnimatedFeatures() {
       {/* Hero */}
       <section className="hero reveal">
         <div className="hero-inner">
-          <img src="/src/assets/chrome.png" alt="Chrome Logo" className="logo-in" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png" alt="Chrome Logo" className="logo-in" />
           <h1 className="hero-title">The browser</h1>
           <h1 className="hero-title">built to be yours</h1>
           <div className="hero-cta">
@@ -354,15 +354,42 @@ export default function AnimatedFeatures() {
       </section>
 
       {/* Image slider (scroll-driven) */}
-      <section className="image-slider reveal">
-        <div className="slider-track">
-          {['/src/assets/image-1.jpg', '/src/assets/image-2.jpeg', '/src/assets/image-3.jpg', '/src/assets/image-4.jpg', '/src/assets/image-5.jpg', '/src/assets/image-6.jpg', '/src/assets/image-7.jpg'].map((s, i) => (
-            <div className="slide" key={i}>
-              <img src={s} alt={`slide-${i}`} />
-            </div>
-          ))}
-        </div>
-      </section>
+<section className="image-slider reveal">
+  {/** slideImages array makes it easy to edit or re-order images **/}
+  {/*
+    Note: these are external image URLs. If you want the preloader
+    to wait for them, add these URLs to your assets preload logic.
+  */}
+  {(() => {
+    const slideImages = [
+      "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/ae0f95196388911.662042616ef51.jpg",
+      "https://cdn.dribbble.com/userupload/14953506/file/original-25946838dd803c6a4f848d63f470dddc.jpg?crop=0x0-1796x1347",
+      "https://cdn.dribbble.com/userupload/14720351/file/original-96b5f780dbe70bd11a2377d94e314f9e.jpg?resize=752x&vertical=center",
+      "https://cdn.dribbble.com/userupload/14974161/file/original-8f89b6b6a768686c463b4ed29148b5b5.jpg?resize=752x&vertical=center",
+      "https://cdn.dribbble.com/userupload/15031977/file/original-f4e03ac00758523dd7af85281161a3d6.jpg?resize=752x&vertical=center",
+      "https://cdn.dribbble.com/userupload/15147548/file/original-bd8c0824a3b47830b94fd5eaa901fee6.jpg?resize=752x&vertical=center",
+      "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/97cfe9196388911.661fedefac4a8.jpg",
+      "https://img3.wallspic.com/previews/7/5/7/9/5/159757/159757-google-google_chrome-chrome_os-chrome_os_2020-chromebook-550x310.jpg"
+    ]
+
+    return (
+      <div className="slider-track">
+        {slideImages.map((src, i) => (
+          <div className="slide" key={i}>
+            <img
+              src={src}
+              alt={`Chrome slide ${i + 1}`}
+              loading="lazy"
+              width="860"
+              height="480"
+            />
+          </div>
+        ))}
+      </div>
+    )
+  })()}
+</section>
+
 
       {/* Discover updates header */}
       <section className="discover-updates reveal">
@@ -400,14 +427,14 @@ export default function AnimatedFeatures() {
           <h4>Automatic updates</h4>
           <p>There’s a new Chrome release every four weeks, making it easy to have the newest features and a faster, safer web browser.</p>
           <a href="#">Learn about automatic updates</a>
-          <img src="/src/assets/automatic-image.png" alt="Automatic update illustration" />
+          <img src="https://www.google.com/chrome/static/images/engagement-homepage/updates/updates-2x.png" />
         </div>
         <div className="right-side">
           <h3>Latest</h3>
           <h4>New from Chrome</h4>
           <p>Chrome regularly updates with tools and features that make it faster and easier to use.</p>
           <a href="#">Learn what’s new on Chrome</a>
-          <img src="/src/assets/chrome.png" alt="Chrome new features" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png" alt="Chrome new features" />
         </div>
       </section>
 
