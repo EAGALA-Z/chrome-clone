@@ -1,0 +1,446 @@
+// main.scss (complete, drop into src/styles/main.scss)
+// Standalone — includes variables so you don't need a separate variables file.
+
+// -------------------- Variables --------------------
+$google-blue: #4285F4;
+$google-green: #34A853;
+$google-yellow: #FBBC05;
+$google-red: #EA4335;
+
+$bg: #f6f8fb;
+$card: #ffffff;
+$text: #0f1724;
+$muted: #6b7280;
+$glass: rgba(255,255,255,0.8);
+$shadow-1: 0 6px 18px rgba(10,20,40,0.06);
+$shadow-2: 0 14px 50px rgba(12,20,40,0.08);
+
+// -------------------- Base --------------------
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: $bg;
+  color: $text;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.45;
+}
+
+a { color: $google-blue; text-decoration: none; }
+img { display: block; max-width: 100%; height: auto; }
+
+// -------------------- App container --------------------
+.animated-root {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 96px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* simple "reveal" helper used by GSAP */
+.reveal { will-change: transform, opacity; }
+
+// -------------------- Preloader --------------------
+.preloader-root { position: fixed; inset: 0; display:flex; align-items:center; justify-content:center; background: rgba(10,15,30,0.04); z-index: 9999; }
+.preloader-card { background: $card; padding: 18px 22px; border-radius: 12px; box-shadow: $shadow-2; display:flex; gap:12px; align-items:center; }
+.spinner { width:36px; height:36px; border-radius:50%; border:4px solid #e6eefb; border-top-color: $google-blue; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg);} }
+.preloader-text { font-weight:600; }
+
+// -------------------- Header --------------------
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1200;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  padding: 12px 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.84), rgba(255,255,255,0.72));
+  backdrop-filter: blur(6px);
+  box-shadow: 0 1px 12px rgba(10,20,40,0.04);
+  border-bottom: 1px solid rgba(12,20,40,0.03);
+}
+.header-left { display:flex; align-items:center; gap:12px; }
+.menu-btn { background: none; border: none; font-size: 22px; cursor: pointer; padding: 6px; line-height: 1; }
+.logo { width:36px; height:36px; object-fit:cover; border-radius:6px; }
+.header-title { font-weight:700; font-size: 18px; color: $text; letter-spacing: 0.2px; }
+
+/* top-nav */
+.top-nav { display:flex; gap:8px; align-items:center; }
+.top-nav button {
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight:600;
+  color: $muted;
+  border-radius: 10px;
+  transition: all .18s ease;
+}
+.top-nav button:hover { color: $google-blue; background: rgba(66,133,244,0.06); transform: translateY(-1px) }
+.top-nav button.active { color: $google-blue; background: rgba(66,133,244,0.06); box-shadow: 0 6px 18px rgba(66,133,244,0.06) }
+
+// -------------------- Side menu --------------------
+.side-menu-overlay { position: fixed; inset: 0; z-index: 1300; display: none; }
+.side-menu-overlay.open { display: block; background: rgba(0,0,0,0.28); }
+.side-menu {
+  position: fixed;
+  left: -360px;
+  top: 0;
+  width: 360px;
+  height: 100%;
+  background: $card;
+  padding: 20px;
+  box-shadow: 2px 0 30px rgba(10,20,40,0.12);
+  transition: left .28s cubic-bezier(.2,.9,.2,1);
+  overflow-y: auto;
+}
+.side-menu.open { left: 0; }
+.side-menu .close-btn { float: right; background: none; border: none; font-size: 26px; cursor: pointer; }
+.menu-links { display:flex; flex-direction: column; gap: 12px; margin-top: 36px; }
+.menu-links a { color: $text; font-weight:600; padding: 8px; border-radius:8px; display:block; transition: background .12s; }
+.menu-links a:hover { background: rgba(66,133,244,0.06) }
+
+/* menu footer area */
+.menu-footer { margin-top: 28px; text-align:center; padding-top: 12px; border-top: 1px dashed rgba(10,20,40,0.04); }
+.menu-logo { width: 72px; height: 72px; margin-bottom: 10px; }
+.menu-footer h3 { margin: 6px 0; font-size: 16px; }
+.menu-footer p { color: $muted; font-size: 13px; margin-top:6px; }
+.menu-footer .download-btn { margin-top: 10px; }
+
+// -------------------- Hero --------------------
+.hero { padding: 64px 12px; text-align:center; }
+.hero-inner { max-width: 920px; margin: 0 auto; }
+.logo-in { width: 90px; display:block; margin: 0 auto 10px; transition: transform .4s ease; }
+.hero-title { font-size: 44px; margin: 6px 0; line-height: 1.02; font-weight: 800; color: $text; }
+.hero-cta { margin-top: 16px; display:flex; flex-direction:column; gap:8px; align-items:center; }
+.hero-sub { color: $muted; font-size: 14px; margin: 0; }
+.download-btn { background: $google-blue; color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight:700; box-shadow: 0 8px 26px rgba(66,133,244,0.12); transition: transform .12s; }
+.download-btn:hover { transform: translateY(-3px); }
+
+// -------------------- Image slider (scroll-driven) --------------------
+.image-slider { margin: 36px 0; overflow:hidden; padding: 12px 0; }
+.slider-track { display:flex; gap: 18px; width: max-content; align-items:center; padding-bottom: 8px; }
+.slide { flex: 0 0 auto; width: 480px; border-radius: 14px; overflow:hidden; box-shadow: $shadow-2; transition: transform .28s; }
+.slide:hover { transform: translateY(-6px) scale(1.02); }
+.slide img { height: 300px; object-fit: cover; width: 100%; }
+
+// -------------------- Discover Updates --------------------
+.discover-updates { padding: 40px 12px; text-align:center; }
+.timer-icon { color: $google-blue; font-size: 28px; vertical-align: middle; margin-right: 6px; }
+
+// -------------------- Sticky mini nav --------------------
+.updates-nav.sticky { position: fixed; top: 64px; left: 0; right: 0; z-index: 1250; display:flex; justify-content:center; gap:10px; background: rgba(255,255,255,0.95); padding:10px 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+.updates-nav.sticky button { padding: 8px 14px; border-radius: 8px; border: none; background: none; cursor: pointer; color: $muted; font-weight:600; }
+.updates-nav.sticky button.active, .updates-nav.sticky button:hover { color: $google-blue; background: rgba(66,133,244,0.06); }
+
+// -------------------- Updates content --------------------
+.updates-content { display:flex; gap: 22px; padding: 28px 6px; align-items:flex-start; }
+.updates-content .left-side, .updates-content .right-side {
+  flex: 1;
+  background: $card;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: $shadow-1;
+}
+.updates-content h3 { margin: 0; font-size: 14px; color: $muted; }
+.updates-content h4 { margin: 6px 0 12px; font-size: 20px; }
+.updates-content p { color: $text; margin-bottom: 12px; }
+.updates-content img { border-radius: 10px; margin-top: 12px; }
+
+// -------------------- Yours Section --------------------
+.yours-section { padding: 36px 6px; text-align:center; }
+.yours-header { display:flex; justify-content:center; gap: 10px; align-items:center; color: $google-red; margin-bottom: 8px; }
+.paint-icon { font-size: 28px; }
+.make-it-yours { margin-bottom: 18px; }
+.make-it-yours .vertical-letters { display:flex; gap: 10px; justify-content:center; font-size:28px; font-weight:700; }
+.slider-section img { width: 880px; max-width: calc(100% - 40px); height: auto; border-radius: 14px; box-shadow: $shadow-2; transition: transform .18s; }
+.details-section { margin-top: 20px; }
+.details-content { display:flex; gap: 24px; align-items:center; justify-content:center; cursor: pointer; }
+.details-content img { width: 420px; max-width: 46%; border-radius: 12px; object-fit: cover; box-shadow: $shadow-1; }
+.details-content .text-content { max-width: 520px; text-align: left; }
+.details-content h3 { margin-top: 0; }
+.details-content button { margin-top: 10px; background: $google-blue; color: #fff; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; }
+
+// -------------------- Safe Section --------------------
+.safe-section { padding: 36px 6px; }
+.safe-section .hero-title { font-size: 28px; text-align: left; margin-bottom: 12px; }
+.safe-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 18px; }
+.safe-item { background: $card; padding: 16px; border-radius: 12px; position:relative; min-height: 180px; box-shadow: $shadow-1; overflow: hidden; transition: transform .18s ease, box-shadow .18s ease; }
+.safe-item.blue-bg { background: linear-gradient(180deg, rgba(66,133,244,0.06), rgba(66,133,244,0.02)); border: 1px solid rgba(66,133,244,0.06); }
+.safe-item img { width: 100%; height: 140px; object-fit: cover; border-radius: 10px; }
+.safe-item .buttons { margin-top: 12px; display:flex; gap: 8px; }
+.safe-item .buttons button { width: 38px; height: 38px; border-radius: 50%; border: none; cursor: pointer; background: $google-blue; color: #fff; font-weight:700; box-shadow: 0 8px 18px rgba(66,133,244,0.12); }
+.safe-item:hover { transform: translateY(-6px); box-shadow: $shadow-2; }
+
+/* expanded view overlay inside safe item */
+.safe-item .expanded-view {
+  position: absolute;
+  inset: 8px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.98);
+  padding: 16px;
+  z-index: 20;
+  box-shadow: 0 18px 40px rgba(10,20,40,0.08);
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: center;
+}
+.safe-item .expanded-view img { width: 45%; border-radius: 8px; }
+.safe-item .expanded-view p { width: 55%; margin: 0; color: $text; }
+
+// -------------------- Fast Section (improved) --------------------
+.fast-section { padding: 36px 6px; text-align:center; }
+.fast-header { margin-bottom: 14px; }
+.video-container { max-width: 920px; margin: 0 auto; border-radius: 12px; overflow: hidden; box-shadow: $shadow-2; }
+.fast-section video { width: 100%; height: auto; display: block; }
+
+/* carousel layout */
+.fast-carousel { display:flex; align-items:center; justify-content:center; gap: 12px; margin-top: 18px; }
+.fast-arrow {
+  background: $card; border: none; width: 44px; height: 44px; border-radius: 10px; cursor:pointer;
+  box-shadow: 0 8px 24px rgba(10,20,40,0.06); font-size: 18px;
+}
+.fast-slide { display:flex; gap: 22px; align-items:center; justify-content:center; padding: 18px; background: $card; border-radius: 12px; box-shadow: $shadow-1; max-width: 920px; width: calc(100% - 120px); }
+.fast-text { max-width: 540px; text-align:left; }
+.fast-text h2 { margin: 0 0 8px 0; font-size: 20px; }
+.fast-text p { color: $muted; margin-bottom: 12px; }
+.fast-image img { width: 340px; border-radius: 12px; object-fit: cover; box-shadow: $shadow-2; }
+
+// -------------------- Built Section (polished design) --------------------
+.built-section { padding: 40px 6px; }
+.built-header h1 { font-size: 22px; margin-bottom: 18px; display:flex; gap:10px; align-items:center; }
+.tools-icon { color: $muted; font-size: 20px; }
+
+/* Google AI block */
+.google-ai {
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 22px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,251,255,0.98));
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: $shadow-2;
+}
+.google-ai .ai-copy h2 { margin: 0; color: $muted; font-size: 14px; }
+.google-ai .ai-copy p { margin: 8px 0; color: $text; line-height:1.45; }
+.google-ai .ai-copy a { display: inline-block; margin-top: 8px; padding: 8px 12px; background: $google-blue; color: #fff; border-radius: 8px; font-weight:700; }
+.google-ai .ai-image img { width: 100%; border-radius: 10px; box-shadow: $shadow-1; }
+
+/* Built items grid (cards) */
+.built-items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+.built-item {
+  background: $card;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: $shadow-1;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s;
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+}
+.built-item img { width: 140px; height: 100px; object-fit: cover; border-radius: 8px; }
+.built-item h3 { margin: 0 0 6px 0; font-size: 16px; }
+.built-item p { margin: 0; color: $muted; font-size: 14px; }
+.built-item:hover { transform: translateY(-8px); box-shadow: $shadow-2; border: 1px solid rgba(66,133,244,0.05); }
+
+/* expanded built item (when clicked) - appears below the card, full width */
+.built-item .expanded-view {
+  margin-top: 12px;
+  width: 100%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.99), rgba(250,251,255,0.99));
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 16px 40px rgba(10,20,40,0.06);
+}
+
+/* small badge to indicate interactive */
+.built-item::after {
+  content: 'Click';
+  font-size: 11px;
+  color: $muted;
+  margin-left: auto;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.03);
+  display: inline-block;
+}
+
+// -------------------- FAQ / Question Section --------------------
+.question-section { padding: 40px 6px; background: #f8fbff; border-radius: 12px; margin-top: 20px; }
+.faq-header h2 { margin: 0 0 12px 0; font-size: 24px; }
+.faq-list { max-width: 760px; margin: 0 auto; }
+.faq-item { background: white; padding: 14px; border-radius: 10px; margin-bottom: 10px; box-shadow: $shadow-1; cursor: pointer; transition: transform .12s; }
+.faq-item:hover { transform: translateY(-4px); }
+
+// -------------------- Download / QR --------------------
+.download-section { text-align:center; margin-top: 18px; }
+.qr-code img { width: 150px; display:block; margin: 14px auto 8px auto; }
+
+// -------------------- Footer --------------------
+.footer-section { background: #0f1724; color: #fff; padding: 36px 6px; border-radius: 12px; margin-top: 26px; }
+.follow-us { text-align:center; margin-bottom: 20px; }
+.social-icons a { color: #fff; margin: 0 10px; font-size: 20px; transition: transform .12s; }
+.social-icons a:hover { transform: translateY(-4px); color: $google-blue; }
+.footer-links { display:flex; gap: 18px; justify-content: space-between; flex-wrap:wrap; }
+.link-section { min-width: 160px; margin-bottom: 8px; }
+.link-section h4 { border-bottom: 2px solid rgba(255,255,255,0.06); padding-bottom: 6px; margin-bottom: 8px; }
+.link-section a { color: #cfcfcf; display:block; margin-bottom: 8px; font-size: 14px; }
+.link-section a:hover { color: #fff; }
+
+// -------------------- Responsive --------------------
+@media (max-width: 1024px) {
+  .image-slider .slide { width: 360px; }
+  .slider-track { gap: 12px; }
+  .google-ai { grid-template-columns: 1fr 320px; }
+  .built-items { grid-template-columns: 1fr; }
+  .fast-slide { width: 100%; padding: 12px; }
+  .details-content { flex-direction: column; gap: 12px; }
+  .details-content img { width: 90%; max-width: 420px; }
+  .slider-section img { width: 90%; }
+}
+
+@media (max-width: 720px) {
+  .hero-title { font-size: 28px; }
+  .image-slider .slide { width: 280px; }
+  .slide img { height: 200px; }
+  .safe-grid { grid-template-columns: 1fr; }
+  .top-nav { display: none; } /* hide big nav on mobile */
+  .side-menu { width: 92%; left: -100%; }
+  .side-menu.open { left: 4%; }
+  .google-ai { display: block; }
+  .google-ai .ai-image img { width: 100%; margin-top: 12px; }
+  .built-item img { display:none; } /* keep cards compact on mobile */
+}
+
+/* small visual polish for interactive controls */
+button { font-family: inherit; }
+
+//this is safe header div
+
+.safe-header{
+  text-align: center;
+}
+
+/* -------------------- Alignment fixes / overrides -------------------- */
+
+/* Center the entire Yours section (heading, big slider, and details) */
+.yours-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* center children horizontally */
+  text-align: center;      /* center text inside children */
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.yours-section .yours-header {
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.yours-section .make-it-yours { margin-bottom: 20px; }
+.yours-section .slider-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.yours-section .slider-section img {
+  margin: 0 auto;
+  max-width: 920px; /* keep the large look you wanted */
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+
+/* Center the details block and keep readable line-length */
+.yours-section .details-section { width: 100%; display:flex; justify-content:center; }
+.yours-section .details-content {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  max-width: 1100px;
+}
+.yours-section .details-content img { width: 520px; max-width: 48%; }
+.yours-section .details-content .text-content {
+  max-width: 520px;
+  text-align: center; /* center heading and paragraph */
+}
+
+/* -------------------- Safe section: center header + nicer grid centering -------------------- */
+.safe-section {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.safe-section .hero-title {
+  text-align: center !important; /* center the "Stay … safe" header */
+  margin-bottom: 18px;
+}
+
+
+
+/* -------------------- Built section: center header and top AI block -------------------- */
+.built-section {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.built-header {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center the header */
+  margin-bottom: 18px;
+}
+.built-header h1 {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* make the google-ai block centered within page and responsive */
+.google-ai {
+  margin-left: auto;
+  margin-right: auto;
+  grid-template-columns: 1fr 420px; /* keep image visible while centering copy */
+}
+
+/* built-item: keep current two-column card look, but center text inside small screens */
+.built-item .default-view {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.built-item h3 { text-align: left; }
+.built-item .expanded-view { text-align: left; }
+
+/* -------------------- Responsive adjustments (re-affirm center on small screens) -------------------- */
+@media (max-width: 1024px) {
+  .yours-section .details-content { flex-direction: column; padding: 0 12px; }
+  .yours-section .details-content img { width: 90%; max-width: 640px; }
+  .yours-section .details-content .text-content { max-width: 90%; }
+  .google-ai { grid-template-columns: 1fr; }
+  .built-header h1 { font-size: 20px; }
+  .safe-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  .yours-section .slider-section img { max-width: 100%; height: auto; }
+  .details-content img { width: 100%; }
+  .built-header h1 { font-size: 18px; }
+}
